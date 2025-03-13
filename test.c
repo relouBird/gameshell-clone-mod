@@ -104,12 +104,14 @@ char *replaceHerosName(char *txt, char *username, int lenTxt)
 int main(int argc, char const *argv[])
 {
     // load_charge();
-    char tab[] = "Je suis quelq'un d'assez fou je reconnais que je suis super-heros.... Bien sur que je suis __USERNAME__(Vous j'en suis fier.)";
-    char s[] = "MUREL ULRICH";
+    // char tab[] = "Je suis quelq'un d'assez fou je reconnais que je suis super-heros.... Bien sur que je suis __USERNAME__(Vous j'en suis fier.)";
+    // char s[] = "MUREL ULRICH";
 
-    char *newTab = replaceHerosName(tab, s, strlen(tab));
+    // char *newTab = replaceHerosName(tab, s, strlen(tab));
 
-    printf("%s", newTab);
+    // printf("%s", newTab);
+
+    printf("Nombre negatif %d \n", -1);
 
     // printf("%s", strstr(tab,s));
 }

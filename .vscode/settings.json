@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "functions.h": "c"
+        "functions.h": "c",
+        "data.h": "c",
+        "windows.h": "c"
     }
 }

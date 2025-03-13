@@ -13,6 +13,7 @@
 
 #define BLOC_LENGTH 70
 
+
 /**
  * Cette fonction permet de dessiner le haut du parchemin du jeu...
  */
@@ -72,17 +73,41 @@ void draw_row(char str[], int taille)
     for (i = 0; i < taille - 1; i++)
     {
         strToWrite[i] = str[i];
-        for (j = i + 1; j <= 70; j++)
+        for (j = i + 1; j <= BLOC_LENGTH; j++)
         {
             strToWrite[j] = ' ';
         }
-        strToWrite[71] = '\0';
+        strToWrite[BLOC_LENGTH + 1] = '\0';
         printf("\r|       |          %s            |       |", strToWrite);
         // Sleep(20);
     }
     printf("\n");
     free(strToWrite);
 }
+
+/**
+ * Cette fonction permet d'ecrire une ligne à l'ecran de l'utilisateur sur une marge de 70 charactères...
+ * @param {char[]} str - Ceci est la chaine de 70 caracteres qui doit etre rediger en temps réel à l'ecran.
+ * @param {int} taille - Ceci represente la taille de la chaine de caractères...
+ */
+void draw_row_question(char str[], int taille){
+    char *strToWrite = calloc(71, sizeof(int));
+    int i, j;
+
+    for (i = 0; i < taille - 1; i++)
+    {
+        strToWrite[i] = str[i];
+        for (j = i + 1; j <= (BLOC_LENGTH - 4); j++)
+        {   
+            strToWrite[j] = ' ';
+        }
+        strToWrite[BLOC_LENGTH + 1] = '\0';
+        printf("\r|       |          %s            |       |", strToWrite);
+        // Sleep(20);
+    }
+    printf("\n");
+    free(strToWrite);
+};
 
 /**
  * Cette fonction permet d'ecrire le coté gauche d'une ligne...
@@ -112,8 +137,9 @@ void draw_right_row_side(int numberLetterLeft)
 /**
  * Cette fonction permet d'ecrire le paragraphe de début de l'histoire...
  * @param {char[]} str - Ceci est la chaine de 70 caracteres qui doit etre rediger en temps réel à l'ecran.
+ * @param {int} emptyRowLen - Ceci est le nombre de ligne vide  à mettre apres les ecrits...
  */
-void draw_History(char *str)
+void draw_History(char *str, int emptyRowLen)
 {
     int len = 0;
     int lenPhrases = 0;
@@ -131,9 +157,42 @@ void draw_History(char *str)
     }
     free(tabSentences);
 
-    draw_empty_row(4);
+    draw_empty_row(emptyRowLen);
 }
 
+/**
+ * Cette fonction permet d'ecrire soit les questions soit le reste du scenario...
+ * @param {char[]} str - Ceci est la chaine de caractères à passer
+ * @param {Boolean} bool - Ceci permet de dire qu'il s'agit d'une reponse
+ */
+void draw_Question_Or_Other ( char *str ,  Boolean bool){
+    int len = 0;
+    int lenPhrases = 0;
+    char SCRIPTS_SCENARIO[512];
+    snprintf(SCRIPTS_SCENARIO , sizeof(SCRIPTS_SCENARIO), str);
+    char **tab = split(SCRIPTS_SCENARIO, strlen(SCRIPTS_SCENARIO), &len);
+    char **tabSentences = phrasesToDraw(tab, len, &lenPhrases);
+
+    // printf("%d", lenPhrases);
+
+    int i = 0;
+    for (i = 0; i < lenPhrases; i++)
+    {
+        char *str = tabSentences[i];
+        if(bool == True){
+            draw_row_question(str, strlen(str));
+        } else{
+            draw_row(str, strlen(str));
+        }
+    }
+    free(tabSentences);
+
+    draw_empty_row(1); 
+}
+
+/**
+ * Cette fonction permet de mettre l'effet de surlignement....
+ */
 void setHighlight()
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -142,6 +201,9 @@ void setHighlight()
     SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 }
 
+/**
+ * Cette fonction permet d'enlever l'effet de surlignement....
+ */
 void resetHighlight()
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -149,6 +211,7 @@ void resetHighlight()
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     SetConsoleTextAttribute(hConsole, 0 | 0 | 0);
 }
+
 /**
  * Cette fonction permet de mettre du teste en surligné
  */

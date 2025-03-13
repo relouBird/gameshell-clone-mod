@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "functions.h"
 
 typedef enum KARMA_POINT
@@ -12,12 +13,22 @@ typedef enum KARMA_POINT
 
 #define SCRIPTS_SCENARIO "L'histoire nous entraine dans le quotidien de Melaiid,fils du roi Thophild qui a ete assassine par un membre du conseil d'administration de son pere lors d'une reception et par la suite s'est reincarne dans le corps d'un enfant originaire d'un bidonville appele __USERNAME__(Vous) et s'est des lors fixe pour objectif de retrouver son statut social."
 
+#define QUESTIONS_NUMBER 5
+#define QUESTIONS_RESPONSES_NUMBER 3
+
 typedef struct QUESTION
 {
     char *prompt;
-    char *responses[3];
-    KARMA_POINT karmalist[3];
+    char **responses;
+    int karmalist[3];
 } QUESTION;
+
+typedef struct QUESTION_SECOND
+{
+    char prompt[512];
+    char responses[3][128];
+    int karmalist[3];
+} QUESTION_SECOND;
 
 /**
  * Cette fonction prend en parametre le nom du joueur et renvoie l'histoire de departs
@@ -29,51 +40,220 @@ char *getScriptScenario(char *username)
 }
 
 /**
+ * Cette fonction permet d'initialiser les questions qu'on devra utiliser plus tard
+ * @param {QUESTION[]} quest - Ceci est le pointeur vers la tableau des questions
+ * @param {char[]} name - Ceci est le pointeur vers la chaine de caractères representant la question
+ * @param {char[][]} responseList - Ceci est le pointeur des pointeurs, c'est le tableau des chaines de caractères representant les reponses
+ * @param {int[]} responsesLenghtList - Ceci est le tableau contenant les tailles de toutes les reponses aux questions
+ */
+void initQuestionOther(QUESTION_SECOND *quest, char *name, char *responseList[3], int *responsesLenghtList)
+{
+    // partie qui gère le prompt
+    int len = strlen(name);
+    snprintf(quest->prompt, sizeof(quest->prompt), name);
+
+    // partie qui gere les reponses aux  questions
+    int i = 0;
+    for (i = 0; i < QUESTIONS_RESPONSES_NUMBER; i++)
+    {
+        snprintf(quest->responses[i], sizeof(quest->responses[i]), responseList[i]);
+    }
+
+    // partie qui gere les points de karma
+    quest->karmalist[0] = (int)1;
+    quest->karmalist[1] = (int)0;
+    quest->karmalist[2] = (int)-1;
+}
+
+/**
+ * Cette fonction permet d'initialiser les questions qu'on devra utiliser plus tard
+ * @param {QUESTION[]} quest - Ceci est le pointeur vers la tableau des questions
+ * @param {char[]} name - Ceci est le pointeur vers la chaine de caractères representant la question
+ * @param {char[][]} responseList - Ceci est le pointeur des pointeurs, c'est le tableau des chaines de caractères representant les reponses
+ * @param {int[]} responsesLenghtList - Ceci est le tableau contenant les tailles de toutes les reponses aux questions
+ */
+void initQuestion(QUESTION *quest, char *name, char *responseList[3], int *responsesLenghtList)
+{
+    // partie qui gère le prompt
+    int len = strlen(name);
+    quest->prompt = malloc((len + 1) * sizeof(char));
+    int i = 0;
+    for (i = 0; i < len; i++)
+    {
+        quest->prompt[i] = name[i];
+    }
+    quest->prompt[i] = '\0';
+
+    // partie qui gere les reponses aux questions
+    quest->responses = malloc(3 * sizeof(char *));
+
+    // printf("Ici ça marche encore \n");
+    i = 0;
+    for (i = 0; i < 3; i++)
+    {
+        char *strReceive = responseList[i];
+        int resLength = responsesLenghtList[i];
+        // printf("Taille %d ,",resLength);
+        quest->responses[i] = malloc((resLength + 1) * sizeof(char));
+        int k = 0;
+        for (k = 0; k < resLength; k++)
+        {
+            quest->responses[i][k] = strReceive[k];
+        }
+        quest->responses[i][k] = '\0';
+        // printf("%s\n",quest->responses[i]);
+    }
+    printf("Affiche au moins la premiere valeur: %s de taille %d\n", quest->responses[0], strlen(quest->responses[0]));
+
+    // partie qui gere les points de karma
+    quest->karmalist[0] = (int)1;
+    quest->karmalist[1] = (int)0;
+    quest->karmalist[2] = (int)-1;
+}
+
+/**
+ * Cette fonction permet de liberer les questions qu'on a dejà utilisé
+ * @param {QUESTION[]} quest - Ceci est le pointeur vers la tableau des questions
+ */
+void freeQuestions(QUESTION quests[])
+{
+    free(quests);
+}
+
+/**
+ * Cette fonction permet de liberer les questions qu'on a dejà utilisé
+ * @param {QUESTION[]} quest - Ceci est le pointeur vers la tableau des questions
+ */
+void freeQuestionsOther(QUESTION_SECOND quests[])
+{
+    free(quests);
+}
+/**
+ * Fonction de test pour verifier toutes les valeurs internes sur un objet QUESTIONS
+ * @param {QUESTION_SECOND} question - Juste la question en parametre...
+ */
+void questionTestOther(QUESTION_SECOND question)
+{
+    printf("\n");
+    printf("\n");
+    printf("Voici toutes les informations par rapport a une question et son objet\nNous avons la question en question '%s'\nSes differentes reponses:\n%s\n%s\n%s\nEt enfin ses valeurs en Karma(%d,%d,%d).", question.prompt, question.responses[0], question.responses[1], question.responses[2], question.karmalist[0], question.karmalist[1], question.karmalist[2]);
+}
+
+/**
+ * Fonction de test pour verifier toutes les valeurs internes sur un objet QUESTIONS
+ * @param {QUESTION} question - Juste la question en parametre...
+ */
+void questionTest(QUESTION question)
+{
+    printf("\n");
+    printf("\n");
+    printf("Voici toutes les informations par rapport a une question et son objet\nNous avons la question en question '%s'\nSes differentes reponses:\n%s\n%s\n%s\nEt enfin ses valeurs en Karma(%d,%d,%d).", question.prompt, question.responses[0], question.responses[1], question.responses[2], question.karmalist[0], question.karmalist[1], question.karmalist[2]);
+}
+
+/**
  * Cette fonction retourne toutes les questions du jeu
  * @param {int *} questionNumber - Ceci permet de recuperer le nombre de question
- * @return {QUESTION}
+ * @return {QUESTION[]}
  */
 QUESTION *getGamesQuestions(int *questionNumber)
 {
-    KARMA_POINT karmalist[] = {PLUS, NEUTRAL, MINUS};
-    QUESTION question1 = {
-        "Lors de votre balade matinale,il rencontre un jeune homme entrain de se faire arnaquer. Que faites-vous ?",
-        {"Faire des signes pour qu'il comprenne que c'est une arnaque",
-         "Juste observer la scène",
-         "Se moquer de lui"},
-        karmalist};
+    QUESTION *QuestionObjectList = malloc((QUESTIONS_NUMBER + 1) * sizeof(QUESTION));
 
-    QUESTION question2 = {
+    char *questionList[QUESTIONS_NUMBER] = {
+        "Lors de votre balade matinale,il rencontre un jeune homme entrain de se faire arnaquer. Que faites-vous ?",
         "Juste après cela,vous décidez de l'approcher et vous constatez qu'il pourrait appartenir à la noblesse. Que faites-vous ?",
-        {"Le faire comprendre qu'il a été arnaqué",
-         "Discuter avec lui sur le produit qu'il a acheté",
-         "Lui dire qu'il a fait une bonne affaire"},
-        karmalist};
+        "Après ce court échange avec le jeune garçon,il décide de faire le tour de la ville avec vous histoire de mieux la connaître. Où décidez-vous d'aller ?",
+        "Après avoir apprécié la visite à __WHERE__,il vous invite à dîner dans sa modeste demeure. Une fois arrivés,vous êtes reçus par la gouvernante du jeune garçon qui vous amène à la salle à manger pendant que le jeune noble s'en va se changer. Étant seul avec la gouvernante vous décidez de:",
+        "Après s'être changé le noble vint se mettre à table avec vous. Ainsi donc la servante après installation mit les couverts. Le noble s'adressant à vous vous demande :Quelles sont vos ambitions dans la vie? Que répondez-vous ?"};
 
-    QUESTION question3 = {
+    char *responseList[QUESTIONS_NUMBER][QUESTIONS_RESPONSES_NUMBER] = {
+        {"Reponse A1: Bref...", "Reponse B1: Et puis.", "Reponse C1: Je suis fou"},
+        {"Reponse A2", "Reponse B2", "Reponse C2"},
+        {"Reponse A3", "Reponse B3", "Reponse C3"},
+        {"Reponse A4", "Reponse B4", "Reponse C4"},
+        {"Reponse A5", "Reponse B5", "Reponse C5"},
+    };
+
+    int i = 0;
+    int j = 0;
+    int tabResponsesLenght[QUESTIONS_RESPONSES_NUMBER] = {0};
+    for (i = 0; i < QUESTIONS_NUMBER; i++)
+    {
+        j = 0;
+        for (j = 0; j < QUESTIONS_RESPONSES_NUMBER; j++)
+        {
+            tabResponsesLenght[j] = strlen(responseList[i][j]);
+            // printf("%s de taille %d ,", responseList[i][j], tabResponsesLenght[j]);
+        }
+        // printf("\n");
+        initQuestion(&QuestionObjectList[i], questionList[i], responseList[i], tabResponsesLenght);
+    }
+
+    // i = 0;
+    // for(i = 0; i < QUESTIONS_NUMBER; i ++){
+    //     questionTest(QuestionObjectList[i]);
+    // }
+    // i = 0;
+    // for (i = 0; i < QUESTIONS_NUMBER; i++)
+    // {
+    //     printf("Question %d : %s\n", i + 1, QuestionObjectList[i].prompt);
+    // }
+
+    *questionNumber = QUESTIONS_NUMBER;
+
+    return QuestionObjectList;
+}
+
+/**
+ * Cette fonction retourne toutes les questions du jeu
+ * @param {int *} questionNumber - Ceci permet de recuperer le nombre de question
+ * @return {QUESTION_SECOND[]}
+ */
+QUESTION_SECOND *getGamesQuestionsOther(int *questionNumber)
+{
+    QUESTION_SECOND *QuestionObjectList = malloc((QUESTIONS_NUMBER) * sizeof(QUESTION_SECOND));
+
+    char *questionList[QUESTIONS_NUMBER] = {
         "Lors de votre balade matinale,il rencontre un jeune homme entrain de se faire arnaquer. Que faites-vous ?",
-        {"Faire des signes pour qu'il comprenne que c'est une arnaque",
-         "Juste observer la scène",
-         "Se moquer de lui"},
-        karmalist};
+        "Juste après cela,vous décidez de l'approcher et vous constatez qu'il pourrait appartenir à la noblesse. Que faites-vous ?",
+        "Après ce court échange avec le jeune garçon,il décide de faire le tour de la ville avec vous histoire de mieux la connaître. Où décidez-vous d'aller ?",
+        "Après avoir apprécié la visite à __WHERE__,il vous invite à dîner dans sa modeste demeure. Une fois arrivés,vous êtes reçus par la gouvernante du jeune garçon qui vous amène à la salle à manger pendant que le jeune noble s'en va se changer. Étant seul avec la gouvernante vous décidez de:",
+        "Après s'être changé le noble vint se mettre à table avec vous. Ainsi donc la servante après installation mit les couverts. Le noble s'adressant à vous vous demande :Quelles sont vos ambitions dans la vie? Que répondez-vous ?"};
 
-    QUESTION question4 = {
-        "Lors de votre balade matinale,il rencontre un jeune homme entrain de se faire arnaquer. Que faites-vous ?",
-        {"Faire des signes pour qu'il comprenne que c'est une arnaque",
-         "Juste observer la scène",
-         "Se moquer de lui"},
-        karmalist};
+    char *responseList[QUESTIONS_NUMBER][QUESTIONS_RESPONSES_NUMBER] = {
+        {"Reponse A1: Bref...", "Reponse B1: Et puis.", "Reponse C1: Je suis fou"},
+        {"Reponse A2", "Reponse B2", "Reponse C2"},
+        {"Reponse A3", "Reponse B3", "Reponse C3"},
+        {"Reponse A4", "Reponse B4", "Reponse C4"},
+        {"Reponse A5", "Reponse B5", "Reponse C5"},
+    };
 
-    QUESTION question4 = {
-        "Lors de votre balade matinale,il rencontre un jeune homme entrain de se faire arnaquer. Que faites-vous ?",
-        {"Faire des signes pour qu'il comprenne que c'est une arnaque",
-         "Juste observer la scène",
-         "Se moquer de lui"},
-        karmalist};
+    int i = 0;
+    int j = 0;
+    int tabResponsesLenght[QUESTIONS_RESPONSES_NUMBER] = {0};
+    for (i = 0; i < QUESTIONS_NUMBER; i++)
+    {
+        j = 0;
+        for (j = 0; j < QUESTIONS_RESPONSES_NUMBER; j++)
+        {
+            tabResponsesLenght[j] = strlen(responseList[i][j]);
+            // printf("%s de taille %d ,", responseList[i][j], tabResponsesLenght[j]);
+        }
+        // printf("\n");
+        initQuestionOther(&QuestionObjectList[i], questionList[i], responseList[i], tabResponsesLenght);
+    }
 
-    QUESTION questionsList[] = {question1, question2, question3, question4};
+    // i = 0;
+    // for(i = 0; i < QUESTIONS_NUMBER; i ++){
+    //     questionTest(QuestionObjectList[i]);
+    // }
+    // i = 0;
+    // for (i = 0; i < QUESTIONS_NUMBER; i++)
+    // {
+    //     printf("Question %d : %s\n", i + 1, QuestionObjectList[i].prompt);
+    // }
 
-    *questionNumber = 5;
+    *questionNumber = QUESTIONS_NUMBER;
 
-    return questionsList;
+    return QuestionObjectList;
 }
