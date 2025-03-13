@@ -1,0 +1,34 @@
+Projet: Jeu de rôle 
+Jeu: Réalité alternative
+Titre: Ascension vers la noblesse 
+Scénario :
+L'histoire nous entraîne dans le quotidien de "(nom)" Melaïd,fils du roi Thophild qui a été assassiné par un membre du conseil d'administration de son père lors d'une réception et par la suite s'est réincarné dans le corps d'un enfant originaire d'un bidonville appelé "nom choisi par le joueur" et s'est dès lors fixé pour objectif de retrouver son statut social 
+Question 1: Lors de votre balade matinale,il rencontre un jeune homme entrain de se faire arnaquer. Que faites-vous ?
+1)Faire des signes pour qu'il comprenne que c'est une arnaque 
+2) Juste observer la scène 
+3)Se moquer de lui
+Question 2: Juste après cela,vous décidez de l'approcher et vous constatez qu'il pourrait appartenir à la noblesse. Que faites-vous ?
+1)Le faire comprendre qu'il a été arnaqué 
+2) Discuter avec lui sur le produit qu'il a acheté 
+3)Lui dire qu'il a fait une bonne affaire 
+Question 3: Après ce court échange avec le jeune garçon,il décide de faire le tour de la ville avec vous histoire de mieux la connaître. Où décidez-vous d'aller ?
+1)Centre ville 
+2)La foire 
+3)Sainte Eglise 
+Question 4: Après avoir apprécié la visite à "lieu choisi par le joueur",il vous invite à dîner dans sa modeste demeure. Une fois arrivés,vous êtes reçus par la gouvernante du jeune garçon qui vous amène à la salle à manger pendant que le jeune noble s'en va se changer. Étant seul avec la gouvernante vous décidez de:
+1) Entamer la conversation en la complimentant 
+2)Parler de la visite en ville 
+3) Expliquer le comportement de son jeune maître lors de la visite.
+Question 5: Après s'être changé le noble vint se mettre à table avec vous. Ainsi donc la servante après installation mit les couverts. Le noble s'adressant à vous vous demande :Quelles sont vos ambitions dans la vie? Que répondez-vous ?
+1) Parcourir le monde et découvrir de nouveaux horizons
+2) Profitez de l'instant présent.
+3) Devenir un noble
+Question 6: Malheureusement pour vous,il s'avère être qu'il a une soirée masquée demain avec les aristocrates de la région à l'occasion de l'anniversaire de la fille aînée du compte Gherhad de la Oya. Il s'excuse ainsi auprès de vous,vous remets une bourse pleine à ras bord de pierre précieuse et vous supplie d'accepter que la calèche vous ramène. Vous acceptez que la calèche vous ramène, en cours de route vous voyez une boutique de vêtements luxueux et là une idée vous traverse l'esprit:"Et si je me rendais à cette soirée ?" Vous demandez alors à la calèche de s'arrêter devant la boutique en prétextant que votre domicile est dans les alentours. Après le départ de la calèche,vous entrez dans la boutique.
+La gérante vous reçoit et demande en quoi elle peut vous aider,vous lui répondez :
+1) Je me rends à une fête demain, pourriez-vous me présenter vos vêtements les plus chers?
+2)Mon maître m'a envoyé ici lui trouver une tenue pour la réception de demain, pourriez-vous orienter mon choix?
+3)J'ai eu vent d'une réception devant avoir lieu demain soir, pourriez-vous m'en dire plus à ce sujet ?
+Question 7: Après avoir longuement discuté avec la gérante et usé de vos charmes, elle vous fit part de l'événement qui aura lieu demain soir au manoir du Gherhad de la Oya ainsi que les conditions d'accès à l'événement. La discussion achevée,la gérante réitéra sa question :"Que puis-je faire pour vous,mon cher?"
+1) Donner-moi,un costume trois pièces et un masque s'il-vous-plaît !
+2) Donner-moi, un uniforme de serviteur avec un masque, s'il-vous-plaît !
+3) Vous m'avez déjà suffisamment aider avec vos précieuses informations,je vous en remercie et vous souhaite une merveilleuse nuit.

@@ -38,7 +38,7 @@ void draw_right_row_side(int numberLetterLeft);
 /**
  * Cette fonction permet de rediger l'histoire du jeu de depart...
 */
-void draw_History();
+void draw_History(char *str);
 
 /**
  * Cette fonction permet de mettre du teste en surligné

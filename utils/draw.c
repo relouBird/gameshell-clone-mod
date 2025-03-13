@@ -11,7 +11,6 @@
     ** la MARGE à gauche de 10 espaces...
 */
 
-
 #define BLOC_LENGTH 70
 
 /**
@@ -83,13 +82,13 @@ void draw_row(char str[], int taille)
     }
     printf("\n");
     free(strToWrite);
-
 }
 
 /**
  * Cette fonction permet d'ecrire le coté gauche d'une ligne...
  */
-void draw_left_row_side(){
+void draw_left_row_side()
+{
     printf("|       |          ");
 }
 
@@ -97,10 +96,12 @@ void draw_left_row_side(){
  * Cette fonction permet d'ecrire le coté droite d'une ligne en prenant juste en compte le nommbre d'espace a prendre...
  * @param {int} numberLetterLeft Ceci est le nombre d'espacement à mettre
  */
-void draw_right_row_side(int numberLetterLeft){
+void draw_right_row_side(int numberLetterLeft)
+{
     char *str = malloc((numberLetterLeft + 1) * sizeof(char));
     int i;
-    for(i = 0; i< numberLetterLeft; i++){
+    for (i = 0; i < numberLetterLeft; i++)
+    {
         str[i] = ' ';
     }
     str[i] = '\0';
@@ -108,16 +109,15 @@ void draw_right_row_side(int numberLetterLeft){
     free(str);
 }
 
-
 /**
  * Cette fonction permet d'ecrire le paragraphe de début de l'histoire...
  * @param {char[]} str - Ceci est la chaine de 70 caracteres qui doit etre rediger en temps réel à l'ecran.
  */
-void draw_History()
+void draw_History(char *str)
 {
     int len = 0;
     int lenPhrases = 0;
-    char *SCRIPTS_SCENARIO = getScriptScenario();
+    char *SCRIPTS_SCENARIO = getScriptScenario(str);
     char **tab = split(SCRIPTS_SCENARIO, strlen(SCRIPTS_SCENARIO), &len);
     char **tabSentences = phrasesToDraw(tab, len, &lenPhrases);
 
@@ -134,14 +134,16 @@ void draw_History()
     draw_empty_row(4);
 }
 
-void setHighlight(){
+void setHighlight()
+{
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 }
 
-void resetHighlight(){
+void resetHighlight()
+{
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
     CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -149,9 +151,10 @@ void resetHighlight(){
 }
 /**
  * Cette fonction permet de mettre du teste en surligné
-*/
-void draw_highlight_test(char *str){
+ */
+void draw_highlight_test(char *str)
+{
     setHighlight();
-    printf("%s \n", str);
+    printf("%s", str);
     resetHighlight();
 }

@@ -52,7 +52,7 @@ void readfs(char *str)
     }
 
     input[i] = '\0';
-    strcpy(str,input);
+    strcpy(str, input);
 }
 
 /**
@@ -149,3 +149,44 @@ char **phrasesToDraw(char **tabStr, int len, int *numberSentences)
     free(tabStr);
     return tab;
 }
+
+
+/**
+ * Cette fonction permet de load l'histoire en remplaçant le nom generique par le nom dun joueur
+ * @param {char[]}  txt Ceci est le texte dans lequel on doit effectuer le remplacement.
+ * @param {char[]} username Ceci est le nom d'utilisateur à remplacer
+ * @param {int} lenTxt Ceci est la taille de la chaine de caracteres passée en premier parametre...
+ * @return {char[]}
+ */
+char *replaceHerosName(char *txt, char *username, int lenTxt)
+{
+    static char texteCpy[512];
+    char *usernameDefault = "__USERNAME__";
+
+    int i = 0;
+    int j = 0;
+    for (i = 0; i < lenTxt; i++)
+    {
+        if (txt[i] == '_' && j == 0)
+        {
+            j = i + strlen(username);
+            i += strlen(usernameDefault);
+            break;
+        }
+        texteCpy[i] = txt[i];
+    }
+
+    strcpy(texteCpy, strcat(texteCpy, username));
+
+    int k = 0;
+    for (k = i; k < lenTxt; k++)
+    {
+        // printf("%d => '%c' ,", k, txt[k]);
+        texteCpy[j] = txt[k];
+        j++;
+    }
+    texteCpy[j] = '\0';
+
+    return texteCpy;
+}
+

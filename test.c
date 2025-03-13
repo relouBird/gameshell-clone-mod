@@ -69,10 +69,47 @@ void load_charge()
     }
 }
 
+char *replaceHerosName(char *txt, char *username, int lenTxt)
+{
+    static char texteCpy[512];
+    char *usernameDefault = "__USERNAME__";
+
+    int i = 0;
+    int j = 0;
+    for (i = 0; i < lenTxt; i++)
+    {
+        if (txt[i] == '_' && j == 0)
+        {
+            j = i + strlen(username);
+            i += strlen(usernameDefault);
+            break;
+        }
+        texteCpy[i] = txt[i];
+    }
+
+    strcpy(texteCpy, strcat(texteCpy, username));
+
+    int k = 0;
+    for (k = i; k < lenTxt; k++)
+    {
+        // printf("%d => '%c' ,", k, txt[k]);
+        texteCpy[j] = txt[k];
+        j++;
+    }
+    texteCpy[j] = '\0';
+
+    return texteCpy;
+}
+
 int main(int argc, char const *argv[])
 {
     // load_charge();
-    char tab[] = "Je suis quelq'un d'assez fou je reconnais que je suis super-héros....";
-    printf("%d", strlen(tab));
-    return 0;
+    char tab[] = "Je suis quelq'un d'assez fou je reconnais que je suis super-heros.... Bien sur que je suis __USERNAME__(Vous j'en suis fier.)";
+    char s[] = "MUREL ULRICH";
+
+    char *newTab = replaceHerosName(tab, s, strlen(tab));
+
+    printf("%s", newTab);
+
+    // printf("%s", strstr(tab,s));
 }

@@ -31,4 +31,13 @@ char **split(char *scripts, int lenScript, int *taille);
  */
 char **phrasesToDraw(char **tabStr, int len, int *numberSentences);
 
+/**
+ * Cette fonction permet de load l'histoire en remplaçant le nom generique par le nom dun joueur
+ * @param {char[]}  txt Ceci est le texte dans lequel on doit effectuer le remplacement.
+ * @param {char[]} username Ceci est le nom d'utilisateur à remplacer
+ * @param {int} lenTxt Ceci est la taille de la chaine de caracteres passée en premier parametre...
+ * @return {char[]}
+ */
+char *replaceHerosName(char *txt, char *username, int lenTxt);
+
 #endif
