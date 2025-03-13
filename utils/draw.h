@@ -19,8 +19,30 @@ void draw_footer();
 void draw_row(char str[], int taille);
 
 /**
+ * Cette fonction permet de mettre des lignes vides
+ * @param {int} len Ceci represente le nombre de lignes vides a mettre...
+*/
+void draw_empty_row(int len);
+
+/**
+ * Cette fonction permet d'ecrire le coté gauche d'une ligne...
+ */
+void draw_left_row_side();
+
+/**
+ * Cette fonction permet d'ecrire le coté droite d'une ligne en prenant juste en compte le nommbre d'espace a prendre...
+ * @param {int} numberLetterLeft Ceci est le nombre d'espacement à mettre
+ */
+void draw_right_row_side(int numberLetterLeft);
+
+/**
  * Cette fonction permet de rediger l'histoire du jeu de depart...
 */
 void draw_History();
+
+/**
+ * Cette fonction permet de mettre du teste en surligné
+*/
+void draw_highlight_test(char *str);
 
 #endif

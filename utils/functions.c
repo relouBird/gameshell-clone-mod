@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
 #include "functions.h"
 
 #define BLOC_LENGTH 70
@@ -27,7 +28,31 @@ int readf(char *str)
         }
     };
 
-    // return i;
+    return i;
+}
+
+void readfs(char *str)
+{
+    char ch;
+    char input[100] = {""};
+    int i = 0;
+
+    while (1)
+    {
+        ch = getch();
+        if (ch == '\r')
+        {
+            break;
+        }
+        if (i < (sizeof(input) - 1))
+        {
+            input[i++] = ch;
+            putchar(ch);
+        }
+    }
+
+    input[i] = '\0';
+    strcpy(str,input);
 }
 
 /**
@@ -67,7 +92,6 @@ char **split(char *scripts, int lenScript, int *taille)
     *taille = i;
     return tab;
 }
-
 
 /**
  * Cette fonction renvoie un tableau de chaine caractères contenant les differents differents phrases à rediger

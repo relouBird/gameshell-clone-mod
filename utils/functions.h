@@ -9,6 +9,12 @@
 int readf(char *str);
 
 /**
+ * Cette fonction renvoie zero (0) si la chaine est vide et change directement la chaine de caractères que vous le passiez en parametre
+ * @param {char[]} str - c'est la chaine de caractères qu'on lira au clavier;
+ */
+void readfs(char *str);
+
+/**
  * Cette fonction permet de diviser un chaine de caractères selon un motif...ABC
  * @param {char*} scripts Ceci est la chaine de characteres a diviser selon le concept
  * @param {int} lenScript Ceci est la taille de la chaine a diviser.

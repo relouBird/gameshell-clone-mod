@@ -2,15 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-#include "../utils/functions.h"
+#include "functions.h"
 #include "draw.h"
+#include "data.h"
 
 /*
     Ici il s'agit de toutes les notes qui doivent etre prises dans le processus de creation du Jeu...abort
     ** la MARGE à gauche de 10 espaces...
 */
 
-#define SCRIPTS_SCENARIO "Sous-domaines illimites Compte FTP illimite Migrations de sites Web gratuites Comptes de messagerie illimites Profil d'entreprise Google gratuit Installation WordPress en 1 clic Garantie de remboursement de 10 jours Vous pouvez mettre a jour les informations de connexion de votre compte a partir de votre tableau de bord Merci pour votre achat, n'hesitez pas a nous contacter si vous avez besoin d'aide"
+
 #define BLOC_LENGTH 70
 
 /**
@@ -39,7 +40,7 @@ void draw_header()
  */
 void draw_footer()
 {
-    printf("|       |                                                                                             |       |\n");
+    // printf("|       |                                                                                             |       |\n");
     printf("|       |                                                                                             |       |\n");
     printf("|       |                                                                                             |       |\n");
     printf("| `---' |                                                                                             | `---' |\n");
@@ -78,24 +79,35 @@ void draw_row(char str[], int taille)
         }
         strToWrite[71] = '\0';
         printf("\r|       |          %s            |       |", strToWrite);
-        Sleep(10);
+        // Sleep(20);
     }
     printf("\n");
     free(strToWrite);
 
-    // for (i = 0; i < taille; i++)
-    // {
-    //     strToWrite[i] = str[i];
-    //     for (j = i + 1; j <= 70; j++)
-    //     {
-    //         strToWrite[j] = ' ';
-    //     }
-    //     strToWrite[71] = '\0';
-    //     printf("\r|       |          %s            |       |\n");
-    //     Sleep(200);
-    // }
-    // free(strToWrite);
 }
+
+/**
+ * Cette fonction permet d'ecrire le coté gauche d'une ligne...
+ */
+void draw_left_row_side(){
+    printf("|       |          ");
+}
+
+/**
+ * Cette fonction permet d'ecrire le coté droite d'une ligne en prenant juste en compte le nommbre d'espace a prendre...
+ * @param {int} numberLetterLeft Ceci est le nombre d'espacement à mettre
+ */
+void draw_right_row_side(int numberLetterLeft){
+    char *str = malloc((numberLetterLeft + 1) * sizeof(char));
+    int i;
+    for(i = 0; i< numberLetterLeft; i++){
+        str[i] = ' ';
+    }
+    str[i] = '\0';
+    printf("%s             |       |\n", str);
+    free(str);
+}
+
 
 /**
  * Cette fonction permet d'ecrire le paragraphe de début de l'histoire...
@@ -105,6 +117,7 @@ void draw_History()
 {
     int len = 0;
     int lenPhrases = 0;
+    char *SCRIPTS_SCENARIO = getScriptScenario();
     char **tab = split(SCRIPTS_SCENARIO, strlen(SCRIPTS_SCENARIO), &len);
     char **tabSentences = phrasesToDraw(tab, len, &lenPhrases);
 
@@ -119,4 +132,26 @@ void draw_History()
     free(tabSentences);
 
     draw_empty_row(4);
+}
+
+void setHighlight(){
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
+}
+
+void resetHighlight(){
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    SetConsoleTextAttribute(hConsole, 0 | 0 | 0);
+}
+/**
+ * Cette fonction permet de mettre du teste en surligné
+*/
+void draw_highlight_test(char *str){
+    setHighlight();
+    printf("%s \n", str);
+    resetHighlight();
 }
