@@ -179,8 +179,13 @@ void draw_Question_Or_Other ( char *str ,  Boolean bool){
     for (i = 0; i < lenPhrases; i++)
     {
         char *str = tabSentences[i];
+        
         if(bool == True){
-            draw_row_question(str, strlen(str));
+            if( i >= 1){
+                draw_row(str, strlen(str));
+            } else{
+                draw_row_question(str, strlen(str));
+            }
         } else{
             draw_row(str, strlen(str));
         }

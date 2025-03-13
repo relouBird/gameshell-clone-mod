@@ -69,7 +69,7 @@ void load_charge()
     }
 }
 
-char *replaceHerosName(char *txt, char *username, int lenTxt)
+char *replaceHerosName(char *txt, char *username, int lenTxt , int lee)
 {
     static char texteCpy[512];
     char *usernameDefault = "__USERNAME__";
@@ -111,7 +111,7 @@ int main(int argc, char const *argv[])
 
     // printf("%s", newTab);
 
-    printf("Nombre negatif %d \n", -1);
+    // printf("Nombre negatif %d \n", -1);
 
     // printf("%s", strstr(tab,s));
 }

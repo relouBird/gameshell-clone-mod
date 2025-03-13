@@ -14,7 +14,7 @@
  * @param {int} questionNumber - Id de la question
  * @param {QUESTION_SECOND} quest - objet contenant les informations par rapport a la questiokn
  */
-void PlayWithQuestion(int questionNumber, QUESTION_SECOND quest, int *totalKarmaPoint, char *location)
+void PlayWithQuestion(int questionNumber, QUESTION_SECOND quest, int *totalKarmaPoint, char location[])
 {
 
     char choiceLetters[3][3] = {"A", "B", "C"};
@@ -26,7 +26,16 @@ void PlayWithQuestion(int questionNumber, QUESTION_SECOND quest, int *totalKarma
     char strQuestion[512] = "Question ";
     strcat(strQuestion, strQuestionNumber);
     strcat(strQuestion, " : ");
-    strcat(strQuestion, quest.prompt);
+    if (questionNumber == 4)
+    {
+        // printf("%s\n\n", location);
+        strcat(strQuestion, replaceLocation(quest.prompt, location, strlen(quest.prompt)));
+    }
+    else
+    {
+        strcat(strQuestion, quest.prompt);
+    }
+
     // printf("%s \n", strQuestion);
     draw_Question_Or_Other(strQuestion, False);
 
@@ -50,19 +59,40 @@ void PlayWithQuestion(int questionNumber, QUESTION_SECOND quest, int *totalKarma
         {
         case 'A':
         case 'a':
-            *totalKarmaPoint += quest.karmalist[0];
+            if (questionNumber == 3)
+            {
+                strcat(location, quest.responses[0]);
+            }
+            else
+            {
+                *totalKarmaPoint += quest.karmalist[0];
+            }
             GameIsWaitingResponse = False;
             break;
 
         case 'B':
         case 'b':
-            *totalKarmaPoint += quest.karmalist[1];
+            if (questionNumber == 3)
+            {
+                strcat(location, quest.responses[1]);
+            }
+            else
+            {
+                *totalKarmaPoint += quest.karmalist[1];
+            }
             GameIsWaitingResponse = False;
             break;
 
         case 'C':
         case 'c':
-            *totalKarmaPoint += quest.karmalist[2];
+            if (questionNumber == 3)
+            {
+                strcat(location, quest.responses[2]);
+            }
+            else
+            {
+                *totalKarmaPoint += quest.karmalist[2];
+            }
             GameIsWaitingResponse = False;
             break;
 
@@ -80,6 +110,8 @@ void Launch_Game()
 {
 
     int TOTAL_KARMA_POINT = 0;
+    char location[64] = "";
+    char finStr[3][24] = {"FIN 1", "FIN 2", "FIN 3"};
 
     // cette partie dessine le haut du rouleau du jeu
     draw_header();
@@ -105,7 +137,7 @@ void Launch_Game()
     int i = 0;
     for (i = 0; i < lenQuestions; i++)
     {
-        PlayWithQuestion(i + 1, QuestionsList[i], &TOTAL_KARMA_POINT, "");
+        PlayWithQuestion(i + 1, QuestionsList[i], &TOTAL_KARMA_POINT, location);
     }
 
     freeQuestionsOther(QuestionsList);
@@ -117,6 +149,10 @@ void Launch_Game()
     draw_Question_Or_Other(MessageToView, False);
 
     draw_footer();
+
+    printf("\n\n");
+
+    
 }
 
 /**

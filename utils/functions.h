@@ -40,4 +40,13 @@ char **phrasesToDraw(char **tabStr, int len, int *numberSentences);
  */
 char *replaceHerosName(char *txt, char *username, int lenTxt);
 
+/**
+ * Cette fonction permet de load un texte et remplace le lieu
+ * @param {char[]}  txt Ceci est le texte dans lequel on doit effectuer le remplacement.
+ * @param {char[]} location Ceci est le lieu à remplacer
+ * @param {int} lenTxt Ceci est la taille de la chaine de caracteres passée en premier parametre...
+ * @return {char[]}
+ */
+char *replaceLocation(char *txt, char *location, int lenTxt);
+
 #endif

@@ -13,6 +13,8 @@ typedef enum KARMA_POINT
 
 #define SCRIPTS_SCENARIO "L'histoire nous entraine dans le quotidien de Melaiid,fils du roi Thophild qui a ete assassine par un membre du conseil d'administration de son pere lors d'une reception et par la suite s'est reincarne dans le corps d'un enfant originaire d'un bidonville appele __USERNAME__(Vous) et s'est des lors fixe pour objectif de retrouver son statut social."
 
+#define PP "Malheureusement pour vous,il s'avère être qu'il a une soirée masquée demain avec les aristocrates de la région à l'occasion de l'anniversaire de la fille aînée du compte Gherhad de la Oya. Il s'excuse ainsi auprès de vous,vous remets une bourse pleine à ras bord de pierre précieuse et vous supplie d'accepter que la calèche vous ramène. Vous acceptez que la calèche vous ramène, en cours de route vous voyez une boutique de vêtements luxueux et là une idée vous traverse l'esprit:Et si je me rendais à cette soirée ? Vous demandez alors à la calèche de s'arrêter devant la boutique en prétextant que votre domicile est dans les alentours. Après le départ de la calèche,vous entrez dans la boutique"
+
 #define QUESTIONS_NUMBER 5
 #define QUESTIONS_RESPONSES_NUMBER 3
 
@@ -163,7 +165,7 @@ QUESTION *getGamesQuestions(int *questionNumber)
         "Lors de votre balade matinale,il rencontre un jeune homme entrain de se faire arnaquer. Que faites-vous ?",
         "Juste après cela,vous décidez de l'approcher et vous constatez qu'il pourrait appartenir à la noblesse. Que faites-vous ?",
         "Après ce court échange avec le jeune garçon,il décide de faire le tour de la ville avec vous histoire de mieux la connaître. Où décidez-vous d'aller ?",
-        "Après avoir apprécié la visite à __WHERE__,il vous invite à dîner dans sa modeste demeure. Une fois arrivés,vous êtes reçus par la gouvernante du jeune garçon qui vous amène à la salle à manger pendant que le jeune noble s'en va se changer. Étant seul avec la gouvernante vous décidez de:",
+        "Après avoir apprécié la visite à __WHEREAME__,il vous invite à dîner dans sa modeste demeure. Une fois arrivés,vous êtes reçus par la gouvernante du jeune garçon qui vous amène à la salle à manger pendant que le jeune noble s'en va se changer. Étant seul avec la gouvernante vous décidez de:",
         "Après s'être changé le noble vint se mettre à table avec vous. Ainsi donc la servante après installation mit les couverts. Le noble s'adressant à vous vous demande :Quelles sont vos ambitions dans la vie? Que répondez-vous ?"};
 
     char *responseList[QUESTIONS_NUMBER][QUESTIONS_RESPONSES_NUMBER] = {
@@ -215,17 +217,17 @@ QUESTION_SECOND *getGamesQuestionsOther(int *questionNumber)
 
     char *questionList[QUESTIONS_NUMBER] = {
         "Lors de votre balade matinale,il rencontre un jeune homme entrain de se faire arnaquer. Que faites-vous ?",
-        "Juste après cela,vous décidez de l'approcher et vous constatez qu'il pourrait appartenir à la noblesse. Que faites-vous ?",
-        "Après ce court échange avec le jeune garçon,il décide de faire le tour de la ville avec vous histoire de mieux la connaître. Où décidez-vous d'aller ?",
-        "Après avoir apprécié la visite à __WHERE__,il vous invite à dîner dans sa modeste demeure. Une fois arrivés,vous êtes reçus par la gouvernante du jeune garçon qui vous amène à la salle à manger pendant que le jeune noble s'en va se changer. Étant seul avec la gouvernante vous décidez de:",
-        "Après s'être changé le noble vint se mettre à table avec vous. Ainsi donc la servante après installation mit les couverts. Le noble s'adressant à vous vous demande :Quelles sont vos ambitions dans la vie? Que répondez-vous ?"};
+        "Juste apres cela,vous decidez de l'approcher et vous constatez qu'il pourrait appartenir a la noblesse. Que faites-vous ?",
+        "Apres ce court echange avec le jeune garçon,il decide de faire le tour de la ville avec vous histoire de mieux la connaetre. Ou decidez-vous d'aller ?",
+        "Apres avoir apprecie la visite au __WHEREAME__,il vous invite a diner dans sa modeste demeure. Une fois arrives,vous etes recus par la gouvernante du jeune garcon qui vous amene a la salle a manger pendant que le jeune noble s'en va se changer. Etant seul avec la gouvernante vous decidez de:",
+        "Apres s'etre changa le noble vint se mettre a table avec vous. Ainsi donc la servante apras installation mit les couverts. Le noble s'adressant a vous vous demande : Quelles sont vos ambitions dans la vie ? Que rapondez-vous ?"};
 
     char *responseList[QUESTIONS_NUMBER][QUESTIONS_RESPONSES_NUMBER] = {
-        {"Reponse A1: Bref...", "Reponse B1: Et puis.", "Reponse C1: Je suis fou"},
-        {"Reponse A2", "Reponse B2", "Reponse C2"},
-        {"Reponse A3", "Reponse B3", "Reponse C3"},
-        {"Reponse A4", "Reponse B4", "Reponse C4"},
-        {"Reponse A5", "Reponse B5", "Reponse C5"},
+        {"Faire des signes pour qu'il comprenne que c'est une arnaque.", "Juste observer la scene.", "Se moquer de lui."},
+        {"Le faire comprendre qu'il a ete arnaque.", "Discuter avec lui sur le produit qu'il a achete.", "Lui dire qu'il a fait une bonne affaire."},
+        {"Centre ville", "La foire", "Sainte Eglise"},
+        {"Entamer la conversation en la complimentant.", "Parler de la visite en ville", "Expliquer le comportement de son jeune maitre lors de la visite."},
+        {"Parcourir le monde et decouvrir de nouveaux horizons.", "Profitez de l'instant present.", "Devenir un noble."},
     };
 
     int i = 0;

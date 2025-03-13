@@ -150,7 +150,6 @@ char **phrasesToDraw(char **tabStr, int len, int *numberSentences)
     return tab;
 }
 
-
 /**
  * Cette fonction permet de load l'histoire en remplaçant le nom generique par le nom dun joueur
  * @param {char[]}  txt Ceci est le texte dans lequel on doit effectuer le remplacement.
@@ -190,3 +189,40 @@ char *replaceHerosName(char *txt, char *username, int lenTxt)
     return texteCpy;
 }
 
+
+/**
+ * Cette fonction permet de load un texte et remplace le lieu
+ * @param {char[]}  txt Ceci est le texte dans lequel on doit effectuer le remplacement.
+ * @param {char[]} location Ceci est le lieu à remplacer
+ * @param {int} lenTxt Ceci est la taille de la chaine de caracteres passée en premier parametre...
+ * @return {char[]}
+ */
+char *replaceLocation(char *txt, char *location, int lenTxt)
+{
+    static char texteCpy[512];
+    char *locationDefault = "__WHEREAME__";
+    int i = 0;
+    int j = 0;
+    for (i = 0; i < lenTxt; i++)
+    {
+        if (txt[i] == '_' && j == 0)
+        {
+            j = i + strlen(location);
+            i += strlen(locationDefault);
+            break;
+        }
+        texteCpy[i] = txt[i];
+    }
+    strcat(texteCpy, location);
+
+    int k = 0;
+    for (k = i; k < lenTxt; k++)
+    {
+        // printf("%d => '%c' ,", k, txt[k]);
+        texteCpy[j] = txt[k];
+        j++;
+    }
+    texteCpy[j] = '\0';
+
+    return texteCpy;
+}
