@@ -17,6 +17,9 @@ void draw_header();
  */
 void draw_footer();
 
+
+void draw_end_script(char *heroName, char *endScript);
+
 /**
  * Cette fonction permet d'ecrire une ligne à l'ecran de l'utilisateur sur une marge de 70 charactères...
  * @param {char[]} str - Ceci est la chaine de 70 caracteres qui doit etre rediger en temps réel à l'ecran.

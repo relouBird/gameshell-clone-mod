@@ -262,3 +262,12 @@ QUESTION_SECOND *getGamesQuestionsOther(int *questionNumber)
 
     return QuestionObjectList;
 }
+
+/**
+ * Cette fonction permet de recuperer toutes les fins alternatives
+ */
+char **getEnding(){
+    static char *end[3] = {"FIN ALTERNATIVE POSITIVE", "FIN ALTERNATIVE NULLE", "FIN ALTERNATIVE NEGATIVE"};
+
+    return end;
+}

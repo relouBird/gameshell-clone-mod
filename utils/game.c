@@ -110,6 +110,7 @@ void Launch_Game()
 {
 
     int TOTAL_KARMA_POINT = 0;
+    char **probablyEnd = getEnding();
     char location[64] = "";
     char finStr[3][24] = {"FIN 1", "FIN 2", "FIN 3"};
 
@@ -152,7 +153,10 @@ void Launch_Game()
 
     printf("\n\n");
 
+    draw_end_script(name, TOTAL_KARMA_POINT > 0 ? probablyEnd[0] : TOTAL_KARMA_POINT < 0 ? probablyEnd[2]
+                                                                                         : probablyEnd[1]);
 
+    printf("\n\n");
 }
 
 /**

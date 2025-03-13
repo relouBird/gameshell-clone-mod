@@ -86,4 +86,9 @@ QUESTION *getGamesQuestions(int *questionNumber);
  */
 QUESTION_SECOND *getGamesQuestionsOther(int *questionNumber);
 
+/**
+ * Cette fonction permet de recuperer toutes les fins alternatives
+ */
+char **getEnding();
+
 #endif
