@@ -18,8 +18,8 @@ typedef struct QUESTION
 
 typedef struct QUESTION_SECOND
 {
-    char prompt[512];
-    char responses[3][128];
+    char prompt[920];
+    char responses[3][256];
     int karmalist[3];
 } QUESTION_SECOND;
 

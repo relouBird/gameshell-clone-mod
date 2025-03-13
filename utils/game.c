@@ -23,7 +23,7 @@ void PlayWithQuestion(int questionNumber, QUESTION_SECOND quest, int *totalKarma
     char strQuestionNumber[10];
     snprintf(strQuestionNumber, sizeof(strQuestionNumber), "%d", questionNumber);
     // printf("%s \n", strQuestionNumber);
-    char strQuestion[512] = "Question ";
+    char strQuestion[920] = "Question ";
     strcat(strQuestion, strQuestionNumber);
     strcat(strQuestion, " : ");
     if (questionNumber == 4)
@@ -42,7 +42,7 @@ void PlayWithQuestion(int questionNumber, QUESTION_SECOND quest, int *totalKarma
     int i = 0;
     for (i = 0; i < QUESTIONS_RESPONSES_NUMBER; i++)
     {
-        char chip[128] = "\t";
+        char chip[256] = "\t";
         strcat(chip, choiceLetters[i]);
         strcat(chip, ") ");
         // strcat(chip, choiceLetters[i]);
@@ -152,7 +152,7 @@ void Launch_Game()
 
     printf("\n\n");
 
-    
+
 }
 
 /**

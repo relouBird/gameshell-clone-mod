@@ -168,7 +168,7 @@ void draw_History(char *str, int emptyRowLen)
 void draw_Question_Or_Other ( char *str ,  Boolean bool){
     int len = 0;
     int lenPhrases = 0;
-    char SCRIPTS_SCENARIO[512];
+    char SCRIPTS_SCENARIO[920];
     snprintf(SCRIPTS_SCENARIO , sizeof(SCRIPTS_SCENARIO), str);
     char **tab = split(SCRIPTS_SCENARIO, strlen(SCRIPTS_SCENARIO), &len);
     char **tabSentences = phrasesToDraw(tab, len, &lenPhrases);

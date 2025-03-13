@@ -15,7 +15,7 @@ typedef enum KARMA_POINT
 
 #define PP "Malheureusement pour vous,il s'avère être qu'il a une soirée masquée demain avec les aristocrates de la région à l'occasion de l'anniversaire de la fille aînée du compte Gherhad de la Oya. Il s'excuse ainsi auprès de vous,vous remets une bourse pleine à ras bord de pierre précieuse et vous supplie d'accepter que la calèche vous ramène. Vous acceptez que la calèche vous ramène, en cours de route vous voyez une boutique de vêtements luxueux et là une idée vous traverse l'esprit:Et si je me rendais à cette soirée ? Vous demandez alors à la calèche de s'arrêter devant la boutique en prétextant que votre domicile est dans les alentours. Après le départ de la calèche,vous entrez dans la boutique"
 
-#define QUESTIONS_NUMBER 5
+#define QUESTIONS_NUMBER 7
 #define QUESTIONS_RESPONSES_NUMBER 3
 
 typedef struct QUESTION
@@ -27,8 +27,8 @@ typedef struct QUESTION
 
 typedef struct QUESTION_SECOND
 {
-    char prompt[512];
-    char responses[3][128];
+    char prompt[920];
+    char responses[3][256];
     int karmalist[3];
 } QUESTION_SECOND;
 
@@ -53,12 +53,14 @@ void initQuestionOther(QUESTION_SECOND *quest, char *name, char *responseList[3]
     // partie qui gère le prompt
     int len = strlen(name);
     snprintf(quest->prompt, sizeof(quest->prompt), name);
+    // printf("%s\n", quest->prompt);
 
     // partie qui gere les reponses aux  questions
     int i = 0;
     for (i = 0; i < QUESTIONS_RESPONSES_NUMBER; i++)
     {
         snprintf(quest->responses[i], sizeof(quest->responses[i]), responseList[i]);
+        // printf("%s\n", quest->responses[i]);
     }
 
     // partie qui gere les points de karma
@@ -220,7 +222,7 @@ QUESTION_SECOND *getGamesQuestionsOther(int *questionNumber)
         "Juste apres cela,vous decidez de l'approcher et vous constatez qu'il pourrait appartenir a la noblesse. Que faites-vous ?",
         "Apres ce court echange avec le jeune garçon,il decide de faire le tour de la ville avec vous histoire de mieux la connaetre. Ou decidez-vous d'aller ?",
         "Apres avoir apprecie la visite au __WHEREAME__,il vous invite a diner dans sa modeste demeure. Une fois arrives,vous etes recus par la gouvernante du jeune garcon qui vous amene a la salle a manger pendant que le jeune noble s'en va se changer. Etant seul avec la gouvernante vous decidez de:",
-        "Apres s'etre changa le noble vint se mettre a table avec vous. Ainsi donc la servante apras installation mit les couverts. Le noble s'adressant a vous vous demande : Quelles sont vos ambitions dans la vie ? Que rapondez-vous ?"};
+        "Apres s'etre changa le noble vint se mettre a table avec vous. Ainsi donc la servante apras installation mit les couverts. Le noble s'adressant a vous vous demande : Quelles sont vos ambitions dans la vie ? Que rapondez-vous ?", "Malheureusement pour vous,il s'avere etre qu'il a une soiree masquee demain avec les aristocrates de la region à l'occasion de l'anniversaire de la fille aînee du compte Gherhad de la Oya. Il s'excuse ainsi aupres de vous,vous remets une bourse pleine e ras bord de pierre precieuse et vous supplie d'accepter que la caleche vous ramene. Vous acceptez que la caleche vous ramene, en cours de route vous voyez une boutique de vetements luxueux et Vous demandez alors e la caleche de s'arreter devant la boutique. Apres le depart de la caleche,vous entrez dans la boutique. La gerante vous reçoit et demande en quoi elle peut vous aider,vous lui répondez :", "Apres avoir longuement discute avec la gerante et use de vos charmes, elle vous fit part de l'evenement qui aura lieu demain soir au manoir du Gherhad de la Oya ainsi que les conditions d'acces a l'evenement. La discussion achevee,la gerante reitera sa question :'Que puis-je faire pour vous,mon cher?'"};
 
     char *responseList[QUESTIONS_NUMBER][QUESTIONS_RESPONSES_NUMBER] = {
         {"Faire des signes pour qu'il comprenne que c'est une arnaque.", "Juste observer la scene.", "Se moquer de lui."},
@@ -228,7 +230,8 @@ QUESTION_SECOND *getGamesQuestionsOther(int *questionNumber)
         {"Centre ville", "La foire", "Sainte Eglise"},
         {"Entamer la conversation en la complimentant.", "Parler de la visite en ville", "Expliquer le comportement de son jeune maitre lors de la visite."},
         {"Parcourir le monde et decouvrir de nouveaux horizons.", "Profitez de l'instant present.", "Devenir un noble."},
-    };
+        {"Je me rends à une fete demain, pourriez-vous me presenter vos vetements les plus chers?", "Mon maitre m'a envoye ici lui trouver une tenue pour la reception de demain, pourriez-vous orienter mon choix?", "J'ai eu vent d'une reception devant avoir lieu demain soir, pourriez-vous m'en dire plus a ce sujet ?"},
+        {"Donner-moi,un costume trois pieces et un masque s'il-vous-plait !", "Donner-moi, un uniforme de serviteur avec un masque, s'il-vous-plaît !", "Vous m'avez deja suffisamment aider avec vos precieuses informations,je vous en remercie et vous souhaite une merveilleuse nuit."}};
 
     int i = 0;
     int j = 0;

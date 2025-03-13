@@ -199,7 +199,7 @@ char *replaceHerosName(char *txt, char *username, int lenTxt)
  */
 char *replaceLocation(char *txt, char *location, int lenTxt)
 {
-    static char texteCpy[512];
+    static char texteCpy[920];
     char *locationDefault = "__WHEREAME__";
     int i = 0;
     int j = 0;
